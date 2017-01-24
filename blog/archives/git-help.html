@@ -45,15 +45,15 @@
         <h3>Invisible Ink</h3>
 
 <p>I made a typo in my last commit message: <code>git commit --amend</code> to
-   bring up and editor or <code>git commit --amend -m</code> to simply re-try typing the
+   bring up an editor or <code>git commit --amend -m</code> to simply re-try typing the
    whole message.
 </p>
 <p><strong>Note</strong>: This only works on the last commit and should <strong>only</strong>
    be done when it has not yet been shared (been fetched by other people). Normally shared
    means pushed to a remote repository, but in the work-flow at my current client I consider
    shared to be when the dev review starts. If you do this (or rebase or anything else that
-   changes history) you would have to force push which would put other people out of sync
-   in a really bad way.
+   changes history) you would have to force push <strong>(DO NOT DO THIS)</strong>
+   which would put other people out of sync in a really bad way.
 </p>
 
         <h3>Sleight of hand</h3>
@@ -62,12 +62,17 @@
 <code>git commit --amend</code> and save.
 </p>
 <p>
-   Keep in mind the note above as the same thing applies (anytime you use <code>--amend</code>).
+   Keep in mind the note above as the same thing applies about shared history.
 </p>
 
         <h3>Going back in time (commit)</h3>
 
-<p>I rebased against the wrong branch: <code>git reset --hard <em>branch-name</em>@{1}</code></p>
+<p>I really do not want any of the junk I just commited: <code>git reset --hard HEAD~1</code>
+   If you may want to keep changes for whatever reason (e.g. you might come back to this later),
+   then either <code>git branch <em>possibly-later-branch-name</em></code> or
+   <code>git reset --soft HEAD~1</code> and <code>git stash</code>
+   (TODO: post on <code>git stash</code> later.)
+</p>
 
         <h3>Going back in time (before rebase)</h3>
 
@@ -118,7 +123,8 @@
         <h3>Rabbit out of the hat (remote branch)</h3>
 
 <p>I deleted the wrong (remote) branch: <code>git push origin <em>old-branch-name</em></code>
-   or <code>git push origin <em>branch-name-or-SHA</em>:<em>branch-name</em></code> will push
+   to restore the remote branch to what it was, or
+   <code>git push origin <em>branch-name-or-SHA</em>:<em>branch-name</em></code> will push
    any branch/commit to origin/<em>branch-name</em>.
 </p>
 
