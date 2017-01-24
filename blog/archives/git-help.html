@@ -35,41 +35,93 @@
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
-        <h3>
-<a id="vim-resources" class="anchor" href="#vim-resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Vim resources</h3>
+        <h3>Eternal commitment</h3>
 
-<p>Built-in command line tutorial: <code>vimtutor</code></p>
+<p>I forgot the closing quote in my commit message: Breathe. Relax.
+   Finish the message if needed. Then type the closing quote and press the
+   <code>&lt;Enter&gt;</code> key a couple of times.
+</p>
 
-<p><a href="http://www.viemu.com/vi-vim-cheat-sheet.gif">Vim Cheatsheet</a></p>
+        <h3>Invisible Ink</h3>
 
-<p><a href="https://github.com/VundleVim/Vundle.vim">Vundle: vim package manager</a></p>
+<p>I made a typo in my last commit message: <code>git commit --amend</code> to
+   bring up and editor or <code>git commit --amend -m</code> to simply re-try typing the
+   whole message.
+</p>
+<p><strong>Note</strong>: This only works on the last commit and should <strong>only</strong>
+   be done when it has not yet been shared (been fetched by other people). Normally shared
+   means pushed to a remote repository, but in the work-flow at my current client I consider
+   shared to be when the dev review starts. If you do this (or rebase or anything else that
+   changes history) you would have to force push which would put other people out of sync
+   in a really bad way.
+</p>
 
-<p><a href="https://www.google.com/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=vim%20color%20schemes">Color Schemes</a></p>
+        <h3>Sleight of hand</h3>
 
-<h3>
-<a id="a-few-basic-things" class="anchor" href="#a-few-basic-things" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>A few basic things</h3>
+<p>I forgot something before I made the last commit: Do whatever it was that you forgot and
+<code>git commit --amend</code> and save.
+</p>
+<p>
+   Keep in mind the note above as the same thing applies (anytime you use <code>--amend</code>).
+</p>
 
-<p><code>&lt;Esc&gt;</code> is your friend (puts you back in Normal mode)</p>
+        <h3>Going back in time (commit)</h3>
 
-<p><code>.</code> is magic (repeats last edit)</p>
+<p>I rebased against the wrong branch: <code>git reset --hard <em>branch-name</em>@{1}</code></p>
 
-<p><code>i</code> enter Insert mode</p>
+        <h3>Going back in time (before rebase)</h3>
 
-<p><code>&lt;Cr&gt;</code> is vim talk for the Enter/Return key</p>
+<p>I rebased against the wrong branch: <code>git reset --hard <em>branch-name</em>@{1}</code></p>
+<p>This will move HEAD to where it was before you rebased. The number one in curly braces
+   assumes you had a clean rebase and have not made any commits/changes yet. To be sure of
+   what number it should be use <code>git reflog <em>branch-name</em></code>. You could
+   alternatively use <code>git reflog</code> and find the HEAD number to go to with
+   <code>git reset --hard HEAD@{4}</code>. Again the number four is an example assuming
+   that is where the HEAD pointed to before you messed up.
+</p>
 
-<p><code>&lt;C-r&gt;</code> is vim talk for Ctrl + R (Redo)</p>
+        <h3>Re-write history</h3>
 
-<p>Save current file: <code>:w&lt;Cr&gt;</code></p>
+<p>I have not shared this and want to re-organize my commit history:
+   <code>git log --pretty=one-line --abbrev-commit</code> (press 'q' to get back to the prompt)
+   Find out how many commits you want to change (going with five for the following example)
+   <code>git rebase --interactive HEAD~5</code>
+</p>
+<p>
+   Now you have the option to re-order, edit, squash, etc. your commit history. <strong>Note:</strong>
+   if you choose to edit a commit the rebase will pause for you to change things. Then you
+   use <code>git rebase --continue</code> to proceed.
+</p>
+<p>
+   Alternatively, you can use <code>git reset --soft HEAD~5</code> then
+   <code>git add --interactive</code>, but this is for another post.
+</p>
 
-<p>Save to a filename (Save As...): <code>:w filename&lt;Cr&gt;</code></p>
+        <h3>Cold feet (merge)</h3>
 
-<p>Exit (all changes are saved): <code>:q&lt;Cr&gt;</code></p>
+<p>I have merge conflicts and am not ready to deal with them now: <code>git merge --abort</code></p>
 
-<p>Exit without saving (ignore changes): <code>:q!&lt;Cr&gt;</code></p>
+        <h3>Cold feet (rebase)</h3>
 
-<p>Save and Exit: <code>:wq&lt;Cr&gt;</code> or <code>ZZ</code> (note both Zs are upper case)</p>
+<p>I have merge conflicts and am not ready to deal with them now: <code>git rebase --abort</code></p>
 
-<p><code>~/.vimrc</code> is the default location of your configuration file (~ is current user's home folder)</p>
+        <h3>Rabbit out of the hat (local branch)</h3>
+
+<p>I deleted the wrong (local) branch: <code>git checkout -b <em>branche-name SHA</em></code></p>
+<p>When you delete a local branch, git kindly displays the first part of the SHA that
+   the deleted branch was pointing to. Also, <code>git reflog</code> can be used to find
+   the first part of the SHA (if deleting it was not the last thing you did). <strong>Note:</strong>
+   "the first part of the SHA" is the first seven (hexadecimal) digits, which is usually
+   unique enough for git to know what commit you are referring to.
+</p>
+
+        <h3>Rabbit out of the hat (remote branch)</h3>
+
+<p>I deleted the wrong (remote) branch: <code>git push origin <em>old-branch-name</em></code>
+   or <code>git push origin <em>branch-name-or-SHA</em>:<em>branch-name</em></code> will push
+   any branch/commit to origin/<em>branch-name</em>.
+</p>
+
       </section>
 
     </div>
